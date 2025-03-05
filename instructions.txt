@@ -1,3 +1,5 @@
+# For CPU:
+
 1) Prepare the MNIST dataset in a CSV files. Run the `create_mnist_csv.py` file. You will need torchvision installed.
 
 2) Compile test.c (which uses tensor.h) using gcc. On my macbook, the command looks like this:
@@ -8,3 +10,16 @@ gcc-14 -O3 -fopenmp -mcpu=apple-m1 -funroll-loops -o testc test.c
 
 3) Run `./testc`
 
+Note: if you are on windows you will need to modify a little. For example, the `#include <sys/time.h>` will not work over there. Please check the CUDA version `test_cuda.cu` to adapt. I will modify the code later.
+
+## For GPU:
+
+1) Prepare the MNIST dataset in a CSV files. Run the `create_mnist_csv.py` file. You will need torchvision installed.
+
+2) Compile using nvcc.
+
+```
+nvcc -o testcuda test_cuda
+```
+
+3) Run `./testcuda`. This should run much faster and you should also be able to see your GPU utilisation go up.
